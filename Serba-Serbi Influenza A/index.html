@@ -1,696 +1,923 @@
 <!DOCTYPE html>
-<html lang="id" style="scroll-behavior: smooth;">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <!-- Query 3: Mematikan fitur zoom di mobile -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- Query 1: Judul diubah -->
-    <title>Serba-serbi tentang Influenza A</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>KSB Suite v6.0 (Ultima)</title>
+    
+    <!-- Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-<script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
-    <style>
-        /* Gaya dasar dari template Angkringan yang dimodifikasi */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Latar belakang bersih */
-            min-height: 100vh;
-            color: #334155; 
-        }
-        
-        /* Tema Gelap */
-        .dark body {
-            background-color: #0f172a; /* Latar belakang gelap */
-            color: #cbd5e1;
-        }
-
-        /* Kontainer utama aplikasi */
-        .container {
-            background-color: #ffffff;
-            .dark & { background-color: #1e293b; }
-            border-radius: 1.5rem; /* Lebih halus */
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-            width: 100%;
-            max-width: 1400px; /* Lebih lebar untuk laporan */
-            margin: 2rem auto;
-            overflow: hidden;
-            transition: all 0.3s ease-in-out;
-        }
-        
-        /* Header aplikasi */
-        .app-header {
-            background-color: #00796b; /* Hijau teh tua */
-            color: #ffffff;
-            padding: 1rem 1.5rem;
-            border-bottom: 4px solid #004d40;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        @media (min-width: 768px) {
-            .app-header { padding: 1.5rem 2.5rem; }
-        }
-        .app-header h1 {
-            font-size: 1.25rem; /* Disesuaikan untuk mobile */
-            font-weight: 800;
-        }
-        @media (min-width: 768px) {
-            .app-header h1 { font-size: 1.75rem; }
-        }
-
-        /* Navigasi Dropdown Canggih (Query 4b) */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: #ffffff;
-            .dark & { background-color: #334155; }
-            min-width: 200px;
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-            border-radius: 0.5rem;
-            z-index: 50;
-            overflow: hidden;
-            /* Animasi sinematik */
-            transform-origin: top right;
-            animation: scaleIn 0.2s ease-out;
-        }
-        .dropdown-content a {
-            color: #334155;
-            .dark & { color: #f1f5f9; }
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-size: 0.875rem;
-            transition: background-color 0.2s ease;
-        }
-        .dropdown-content a:hover { 
-            background-color: #f1f5f9; 
-            .dark & { background-color: #475569; }
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        /* Grid utama (Query 2: Tata letak diubah) */
-        .main-grid {
-            display: grid;
-            grid-template-columns: 1fr; /* Default 1 kolom untuk mobile */
-            gap: 1.5rem;
-            padding: 1rem 1.5rem 2.5rem 1.5rem;
-        }
-        @media (min-width: 1024px) {
-            .main-grid {
-                grid-template-columns: repeat(3, 1fr); /* 3 kolom di desktop */
-                padding: 1.5rem 2.5rem;
-            }
-        }
-        
-        /* Kolom (Query 2: Diubah untuk Mobile-first & Desktop Optimal) */
-        .main-column { /* Kolom Teks (Lebar) */
-            grid-column: span 1 / span 1;
-        }
-        .sidebar-column { /* Kolom Visual (Sempit) */
-            grid-column: span 1 / span 1;
-        }
-        @media (min-width: 1024px) {
-            .main-column {
-                grid-column: span 2 / span 2; /* Kolom 1 (Teks) 2/3 di desktop */
-            }
-            .sidebar-column {
-                grid-column: span 1 / span 1; /* Kolom 2 (Visual) 1/3 di desktop */
-                position: sticky; /* Membuat sidebar tetap terlihat saat scroll */
-                top: 2rem;
-            }
-        }
-        
-        /* Kartu Accordion (Query 4b) */
-        .section-card {
-            background-color: #ffffff;
-            .dark & { background-color: #1e293b; }
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            .dark & { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1); }
-            overflow: hidden;
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
-        }
-        .section-card:hover {
-            transform: translateY(-4px); /* Animasi hover (Query 4c, 5b) */
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            .dark & { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.08); }
-        }
-        .section-card summary {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.5rem;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #004d40;
-            cursor: pointer;
-            list-style: none; 
-        }
-        .section-card summary::-webkit-details-marker { display: none; }
-        .section-card summary .icon { transition: transform 0.3s ease; }
-        .section-card[open] summary .icon { transform: rotate(180deg); }
-        
-        .section-content {
-            padding: 0 1.5rem 1.5rem 1.5rem;
-            border-top: 1px solid #e2e8f0;
-            .dark & { border-top-color: #334155; }
-        }
-        .section-content p, .section-content ul {
-            margin-bottom: 1rem;
-            line-height: 1.7; /* Lebih mudah dibaca */
-            color: #475569;
-            .dark & { color: #cbd5e1; }
-        }
-         .section-content h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #00796b;
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .section-content ul {
-            list-style-type: disc;
-            padding-left: 1.5rem;
-        }
-
-        /* Segmented Control (Query 4b) */
-        .segmented-control {
-            display: flex;
-            flex-direction: column; /* Tumpuk di mobile (Query 2) */
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        @media (min-width: 640px) {
-            .segmented-control {
-                flex-direction: row; /* Berjajar di tablet+ */
-                background-color: #e2e8f0;
-                .dark & { background-color: #0f172a; }
-                border-radius: 0.75rem;
-                padding: 0.25rem;
-            }
-        }
-        .segment-btn {
-            flex: 1;
-            padding: 0.75rem 0.5rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #475569;
-            .dark & { color: #94a3b8; }
-            border-radius: 0.75rem;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        .segment-btn:hover {
-            background-color: #f1f5f9;
-            .dark & { background-color: #1e293b; }
-        }
-        .segment-btn.active {
-            background-color: #ffffff;
-            .dark & { background-color: #334155; }
-            color: #00796b;
-            font-weight: 700;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-        .fact-check-pane {
-            display: none; /* Dikelola oleh JS */
-            animation: fadeIn 0.5s ease; /* Animasi transisi (Query 5a) */
-        }
-        .fact-check-pane.active {
-            display: block;
-        }
-        
-        /* Kartu Verifikasi Fakta */
-        .fact-check-item {
-            display: flex;
-            align-items: flex-start;
-            background-color: #ffffff;
-            .dark & { background-color: #334155; }
-            border-radius: 1rem;
-            padding: 1rem;
-            border: 1px solid #e2e8f0;
-            .dark & { border-color: #475569; }
-        }
-        .fact-check-item .icon-status {
-            flex-shrink: 0;
-            width: 2.5rem;
-            height: 2.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 9999px;
-            margin-right: 1rem;
-            font-size: 1.25rem;
-        }
-        .status-akurat { background-color: #dcfce7; color: #166534; }
-        .status-tidak-akurat { background-color: #fee2e2; color: #991b1b; }
-        .status-konteks { background-color: #fef9c3; color: #854d0e; }
-        
-        .fact-check-item .claim {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #1e293b;
-            .dark & { color: #f1f5f9; }
-        }
-        .fact-check-item .explanation {
-            font-size: 0.9rem;
-            color: #475569;
-            .dark & { color: #cbd5e1; }
-            margin-top: 0.25rem;
-            line-height: 1.6;
-        }
-
-        /* Floating Action Button (FAB) (Query 4b) */
-        .fab {
-            position: fixed;
-            bottom: 1.5rem;
-            right: 1.5rem;
-            width: 3.5rem;
-            height: 3.5rem;
-            background-color: #00796b;
-            color: white;
-            border-radius: 9999px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 20px rgba(0, 121, 107, 0.3);
-            cursor: pointer;
-            z-index: 100;
-            transition: all 0.3s ease;
-        }
-        .fab:hover {
-            background-color: #004d40;
-            transform: scale(1.1) translateY(-4px); /* Animasi hover (Query 4c, 5b) */
-            box-shadow: 0 15px 25px rgba(0, 121, 107, 0.4);
-        }
-
-        /* Tooltip (Query 4b, 4c) */
-        #tooltip {
-            position: absolute;
-            display: none; /* Dikelola JS */
-            background-color: #1e293b;
-            color: white;
-            padding: 0.5rem 0.75rem;
-            border-radius: 0.5rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            z-index: 200;
-            pointer-events: none; /* Penting */
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-
-        /* Animasi Sinematik (Query 5a) */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        .animate-fade-in { animation: fadeIn 0.8s ease-out; }
-        .animate-slide-in-up { animation: slideInUp 0.8s ease-out; }
-    </style>
-</head>
-<body class="dark:bg-bg-dark"> <!-- Hapus bg-gradient dari body -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
-    <!-- Latar belakang gradien baru (lebih subtil) -->
-    <div class="fixed inset-0 -z-10 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-cyan-50 to-teal-100 dark:from-slate-900 dark:to-teal-950"></div>
-    </div>
-    
-    <!-- Tooltip (Query 4b) -->
-    <div id="tooltip"></div>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-    <!-- Floating Action Button (FAB) (Query 4b) -->
-    <a href="#panduan" id="fab" class="fab">
-        <i class="fas fa-book-medical fa-lg"></i>
-    </a>
-
-    <div class="container animate-fade-in">
-        <!-- Header Aplikasi -->
-        <header class="app-header">
-            <!-- Query 1: Judul diubah -->
-            <h1 class="animate-slide-in-up" style="animation-delay: 100ms;">Serba-serbi tentang Influenza A</h1>
-            
-            <!-- Query 4b: Menu Dropdown -->
-            <div class="dropdown animate-slide-in-up" style="animation-delay: 200ms;">
-                <button class="text-white p-2 rounded-full hover:bg-white/20 transition-colors">
-                    <i class="fas fa-bars fa-lg"></i>
-                </button>
-                <!-- Query 1 & 2: Teks menu diubah -->
-                <div class="dropdown-content">
-                    <a href="#ringkasan"><i class="fas fa-search-plus fa-fw mr-2"></i>Cerita Awal Pesan Viral</a>
-                    <a href="#analisis"><i class="fas fa-microscope fa-fw mr-2"></i>Ayo Bedah Faktanya!</a>
-                    <a href="#panduan"><i class="fas fa-book-medical fa-fw mr-2"></i>Panduan Sehat Kita</a>
-                    <a href="#pustaka"><i class="fas fa-link fa-fw mr-2"></i>Sumber Rujukan</a>
-                    <hr class="border-gray-200 dark:border-gray-600 my-1">
-                    <a href="#cek-fakta"><i class="fas fa-tasks fa-fw mr-2"></i>Fakta Singkat</a>
-                    <a href="#perbandingan"><i class="fas fa-chart-bar fa-fw mr-2"></i>Beda Flu & COVID-19</a>
-                </div>
-            </div>
-        </header>
-
-        <!-- Konten Utama Grid -->
-        <main class="main-grid">
-            
-            <!-- Kolom Kiri (Laporan Teks) (Query 2: Diubah jadi .main-column) -->
-            <div class="main-column animate-slide-in-up" style="animation-delay: 300ms;">
-                
-                <!-- Query 1 & 2: Gaya Bahasa & Narasi Baru -->
-                <!-- Query 4b: Accordion (<details>) -->
-                <details class="section-card" open id="ringkasan">
-                    <summary>
-                        Cerita Awal: Kenapa Pesan Ini Beredar?
-                        <i class="fas fa-chevron-down icon"></i>
-                    </summary>
-                    <div class="section-content">
-                        <h3>Ringkasnya: Ada Apa Sih?</h3>
-                        <p>Pernah terima pesan berantai di WhatsApp soal Influenza A? Rasanya kita semua pernah, ya. Nah, di sini kita akan coba kupas tuntas pesan itu. Kita akan cek faktanya satu per satu, bandingkan dengan data ilmiah, dan cari penjelasan yang paling jujur.</p>
-                        <p>Hasilnya? Pesan itu ternyata campur aduk. Ada yang benar, tapi ada juga yang keliru dan berlebihan. Niatnya mungkin baik, tapi cara penyajiannya bisa bikin kita panik.</p>
-
-                        <h3>Memahami 'Infodemik'</h3>
-                        <p>Setelah pandemi, kita jadi lebih waspada soal berita virus. Wajar, kok. Pesan ini adalah contoh 'infodemik': campuran antara fakta dan hoaks yang dikemas jadi cerita heboh.</p>
-                        <p>Tujuan kita di sini bukan menyepelekan rasa khawatir. Tapi, mari kita arahkan jadi pemahaman yang benar. Kita belajar bareng membedakan mana info valid dan mana yang bikin panik.</p>
-                    </div>
-                </details>
-
-                <details class="section-card" id="analisis">
-                    <summary>
-                        Ayo Bedah Faktanya! (Bagian 1-4)
-                        <i class="fas fa-chevron-down icon"></i>
-                    </summary>
-                    <div class="section-content">
-                        <h3>Bagian 1: Soal Gejala</h3>
-                        <p><strong>Validasi Infografis:</strong> Infografis gejala (demam, batuk, dll) itu sebagian besar benar. Itu memang gambaran klasik flu musiman yang diakui WHO.</p>
-                        <p><strong>Perbandingan dengan COVID-19:</strong> Klaim "mirip Covid" itu yang bikin cemas. Meski mirip, datanya beda. Gejala seperti <strong>Pilek</strong> dan <strong>Sakit Tenggorokan</strong> ternyata <strong>JAUH LEBIH UMUM</strong> di Flu A. Coba cek tabel di samping.</p>
-
-                        <h3>Bagian 2: Cara Diagnosis</h3>
-                        <p><strong>Investigasi Klaim "Cek Darah":</strong> Poin penting: Klaim "cek darah" itu <strong>KELIRU</strong>. Flu adalah virus pernapasan, jadi tes standarnya pakai sampel napas (usap hidung/tenggorokan), BUKAN tes darah. Tes darah hanya melihat infeksi di masa lalu.</p>
-
-                        <h3>Bagian 3: Situasi Sebenarnya</h3>
-                        <p><strong>Klaim "IGD Penuh":</strong> Kasus ISPA (infeksi napas) memang naik. Itu fakta. Tapi, pesan viral itu 'lupa' kasih konteks. Kata ahli, ini fenomena <strong>MUSIMAN</strong> yang wajar dan bisa dikelola, bukan murni ledakan Flu A.</p>
-                        
-                        <h3>Bagian 4: Protokol RS</h3>
-                        <p><strong>Klaim "Isolasi" & "Dilarang Jenguk":</strong> Klaim ini memang <strong>AKURAT</strong>. TAPI... ini bukan hal baru. Ini adalah SOP standar rumah sakit untuk <strong>SEMUA</strong> penyakit menular (seperti TBC). Tujuannya mulia: melindungi semua orang di RS.</p>
-                    </div>
-                </details>
-
-                <details class="section-card" open id="panduan">
-                    <summary>
-                        Panduan Sehat Kita
-                        <i class="fas fa-chevron-down icon"></i>
-                    </summary>
-                    <div class="section-content">
-                        <h3>1. Pencegahan Itu Utama</h3>
-                        <ul>
-                            <li><strong>Vaksinasi:</strong> Vaksinasi flu tahunan adalah perisai terbaik kita, terutama untuk keluarga di kelompok berisiko (anak-anak, lansia).</li>
-                            <li><strong>Cuci Tangan:</strong> Rajin cuci tangan pakai sabun. Kebiasaan sederhana yang dampaknya besar.</li>
-                            <li><strong>Etika Bernapas:</strong> Tutup mulut saat batuk. Pakai masker jika kita merasa kurang sehat. Itu tindakan bijak untuk saling menjaga.</li>
-                        </ul>
-                        <h3>2. Jika Gejala Muncul</h3>
-                        <ul>
-                            <li><strong>Istirahat di Rumah:</strong> Gejala ringan? Tubuh kita hanya perlu istirahat cukup dan banyak minum air putih. Fokus pemulihan di rumah.</li>
-                            <li><strong>Isolasi Mandiri:</strong> Tetap di rumah saat sakit adalah tanggung jawab kita bersama untuk menghentikan penularan.</li>
-                        </ul>
-                        <h3>3. Tanda Bahaya (Segera ke Dokter)</h3>
-                        <p>Penting untuk kita kenali. Segera cari bantuan medis jika ada:</p>
-                        <ul class="list-none space-y-2">
-                            <li class="flex items-center"><i class="fas fa-exclamation-triangle text-red-500 fa-fw mr-2"></i>Kesulitan bernapas atau sesak napas.</li>
-                            <li class="flex items-center"><i class="fas fa-exclamation-triangle text-red-500 fa-fw mr-2"></i>Nyeri atau tekanan yang menetap di dada.</li>
-                            <li class="flex items-center"><i class="fas fa-exclamation-triangle text-red-500 fa-fw mr-2"></i>Pusing tiba-tiba atau kebingungan.</li>
-                            <li class="flex items-center"><i class="fas fa-exclamation-triangle text-red-500 fa-fw mr-2"></i>Kejang.</li>
-                            <li class="flex items-center"><i class="fas fa-exclamation-triangle text-red-500 fa-fw mr-2"></i>Pada anak-anak: napas cepat, kulit kebiruan.</li>
-                        </ul>
-                        <h3>4. Jadilah Cerdas Informasi</h3>
-                        <p>Mari kita bersikap kritis dan bijak. Selalu cek info ke sumber resmi (Kemenkes, WHO). Jangan ikut sebar pesan yang belum terverifikasi.</p>
-                    </div>
-                </details>
-
-                 <details class="section-card" id="pustaka">
-                    <summary>
-                        Sumber Rujukan (Daftar Pustaka)
-                        <i class="fas fa-chevron-down icon"></i>
-                    </summary>
-                    <div class="section-content">
-                        <ul style="font-size: 0.8rem; line-height: 1.4; list-style-type: decimal; color: #64748b;" class="dark:text-gray-500">
-                            <li>Influenza (seasonal) - WHO (who.int/health-topics/influenza-seasonal)</li>
-                            <li>Influenza (seasonal) - WHO (who.int/news-room/fact-sheets/detail/influenza-(seasonal))</li>
-                            <li>Influenza (Flu) Fact Sheet - New York State Department of Health</li>
-                            <li>Influenza (flu) - Symptoms and causes - Mayo Clinic</li>
-                            <li>Seasonal Influenza Fact Sheet - Maryland Department of Health</li>
-                            <li>Comparison of influenza type A and B with COVID-19: A global ... - (pmc.ncbi.nlm.nih.gov)</li>
-                            <li>Comparison of influenza type A and B with COVID-19 ... - PubMed</li>
-                            <li>Flu (Influenza) Test: MedlinePlus Medical Test</li>
-                            <li>Influenza - Infectious Diseases - MSD Manual Professional Edition</li>
-                            <li>Influenza (flu) - Diagnosis and treatment - Mayo Clinic</li>
-                            <li>Influenza Virus Testing Methods - CDC</li>
-                            <li>Influenza Diagnosis | NIAID</li>
-                            <li>Kasus Penyakit Pernapasan dan Gejala Influenza ... - RRI.co.id</li>
-                            <li>Cuaca Tak Menentu, Polusi Naik, Kasus ISPA ... - Tribunnews.com</li>
-                            <li>Kasus ISPA di Jakarta Hampir Tembus 2 Juta - RRI</li>
-                            <li>TATANAN RUANG-RUANG PELAYANAN INFEKSI... - PERSI</li>
-                            <li>KEPMENKES RI NOMOR ΗΚ.01.07/MENKES/230/2021 ... - Peraturan BPK</li>
-                            <li>BANGUNAN DAN PRASARANA RUANG ISOLASI PIE - RS Paru Manguharjo</li>
-                            <li>Fungsi Ruang Isolasi di Rumah Sakit ... - Alodokter</li>
-                            <li>jamkunjungpasien Archives - Rumah Sakit Panti Rapih</li>
-                        </ul>
-                    </div>
-                </details>
-            </div>
-            
-            <!-- Kolom Kanan (Visualisasi Data) (Query 2: Diubah jadi .sidebar-column) -->
-            <div class="sidebar-column animate-slide-in-up" style="animation-delay: 500ms;">
-                
-                <!-- Query 4b: Segmented Control menggantikan daftar statis -->
-                <div class="section-card" id="cek-fakta">
-                    <summary style="background-color: #ffffff; border-bottom: 1px solid #e0e0e0;" class="dark:bg-transparent dark:border-slate-700">
-                        Fakta Singkat
-                    </summary>
-                    <div class="section-content">
-                        <!-- Query 2: Tombol diringkas -->
-                        <div class="segmented-control">
-                            <button class="segment-btn active" data-target="pane-gejala">Gejala</button>
-                            <button class="segment-btn" data-target="pane-diagnosis">Diagnosis</button>
-                            <button class="segment-btn" data-target="pane-igd">Situasi RS</button>
-                            <button class="segment-btn" data-target="pane-isolasi">Protokol</button>
-                        </div>
-                        
-                        <!-- Pane 1: Gejala -->
-                        <div id="pane-gejala" class="fact-check-pane active">
-                            <div class="fact-check-item">
-                                <div class="icon-status status-akurat"><i class="fas fa-check"></i></div>
-                                <div class="text-content">
-                                    <!-- Query 2: Teks diringkas -->
-                                    <span class="claim">Klaim: Infografis Gejala</span>
-                                    <p class="explanation">Sebagian Besar Akurat. Gejala (demam, batuk, dll) adalah tanda klasik flu musiman.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Pane 2: Diagnosis -->
-                        <div id="pane-diagnosis" class="fact-check-pane">
-                            <div class="fact-check-item">
-                                <div class="icon-status status-tidak-akurat"><i class="fas fa-times"></i></div>
-                                <div class="text-content">
-                                    <span class="claim">Klaim: Diagnosis Tes Darah</span>
-                                    <p class="explanation">Tidak Akurat. Standar diagnosis pakai sampel napas (usap hidung), bukan tes darah.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Pane 3: Situasi/IGD -->
-                        <div id="pane-igd" class="fact-check-pane">
-                            <div class="fact-check-item">
-                                <div class="icon-status status-konteks"><i class="fas fa-exclamation-triangle"></i></div>
-                                <div class="text-content">
-                                    <span class="claim">Klaim: "IGD Penuh" & "Mirip Covid"</span>
-                                    <p class="explanation">Perlu Konteks. Peningkatan ISPA itu musiman. Gejala mirip tapi tidak identik (pilek/sakit tenggorokan lebih umum di Flu A).</p>
-                                </div>
-                            </div>
-                        </div>
-                         <!-- Pane 4: Isolasi -->
-                        <div id="pane-isolasi" class="fact-check-pane">
-                            <div class="fact-check-item">
-                                <div class="icon-status status-akurat"><i class="fas fa-check"></i></div>
-                                <div class="text-content">
-                                    <span class="claim">Klaim: Isolasi & Dilarang Jenguk</span>
-                                    <p class="explanation">Akurat. TAPI ini SOP standar RS untuk semua penyakit menular, bukan hal baru.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Hasil Analisis (Tabel Perbandingan) -->
-                <div class="section-card" id="perbandingan">
-                     <summary style="background-color: #ffffff; border-bottom: 1px solid #e0e0e0;" class="dark:bg-transparent dark:border-slate-700">
-                        Beda Flu A vs. COVID-19
-                    </summary>
-                    <div class="section-content">
-                        <!-- Query 2: Teks diringkas -->
-                        <p class="mb-4 text-sm">Data ini membantu kita melihat bedanya secara jelas.</p>
-                        <div class="overflow-x-auto"> <!-- Query 2: Memastikan tabel aman di mobile -->
-                            <table class="w-full text-left text-sm">
-                                <thead class="bg-gray-100 dark:bg-slate-700">
-                                    <tr>
-                                        <th class="p-3 font-semibold">Gejala</th>
-                                        <th class="p-3 font-semibold text-center">Influenza A</th>
-                                        <th class="p-3 font-semibold text-center">COVID-19</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white dark:bg-transparent">
-                                    <tr class="border-t dark:border-slate-700">
-                                        <td class="p-3 font-medium">Demam</td>
-                                        <td class="p-3 font-bold text-teal-700 text-center dark:text-teal-400">~87.5%</td>
-                                        <td class="p-3 text-center">~76%</td>
-                                    </tr>
-                                    <tr class="border-t dark:border-slate-700">
-                                        <td class="p-3 font-medium">Batuk</td>
-                                        <td class="p-3 font-bold text-teal-700 text-center dark:text-teal-400">~83.5%</td>
-                                        <td class="p-3 text-center">~54%</td>
-                                    </tr>
-                                    <tr class="border-t dark:border-slate-700">
-                                        <td class="p-3 font-medium">Hidung Berair
-                                            <!-- Query 4b: Tooltip -->
-                                            <i class="fas fa-info-circle text-gray-400 text-xs ml-1" 
-                                               data-tooltip-text="Ini beda paling jelas, sahabat."></i>
-                                        </td>
-                                        <td class="p-3 font-bold text-teal-700 text-center dark:text-teal-400">~70%</td>
-                                        <td class="p-3 text-center">~14%</td>
-                                    </tr>
-                                    <tr class="border-t dark:border-slate-700">
-                                        <td class="p-3 font-medium">Sakit Tenggorokan
-                                            <i class="fas fa-info-circle text-gray-400 text-xs ml-1"
-                                               data-tooltip-text="Ini juga beda yang signifikan!"></i>
-                                        </td>
-                                        <td class="p-3 font-bold text-teal-700 text-center dark:text-teal-400">~49%</td>
-                                        <td class="p-3 text-center">~11.5%</td>
-                                    </tr>
-                                    <tr class="border-t dark:border-slate-700">
-                                        <td class="p-3 font-medium">Nyeri Otot</td>
-                                        <td class="p-3 font-bold text-teal-700 text-center dark:text-teal-400">~32%</td>
-                                        <td class="p-3 text-center">~20%</td>
-                                    </tr>
-                                    <tr class="border-t dark:border-slate-700">
-                                        <td class="p-3 font-medium">Kelelahan</td>
-                                        <td class="p-3 font-bold text-teal-700 text-center dark:text-teal-400">~60%</td>
-                                        <td class="p-3 text-center">~27%</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </main>
-    </div>
-
-    <!-- Tambahan Script untuk Navigasi Canggih (Query 4d) -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-
-            // Logika untuk Segmented Control (Query 4b, 4d)
-            const segmentButtons = document.querySelectorAll('.segment-btn');
-            const factPanes = document.querySelectorAll('.fact-check-pane');
-
-            segmentButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Hapus 'active' dari semua tombol
-                    segmentButtons.forEach(btn => btn.classList.remove('active'));
-                    // Tambahkan 'active' ke tombol yang diklik
-                    button.classList.add('active');
-
-                    const targetId = button.getAttribute('data-target');
-
-                    // Sembunyikan semua pane
-                    factPanes.forEach(pane => {
-                        pane.classList.remove('active');
-                    });
-
-                    // Tampilkan pane yang ditarget
-                    document.getElementById(targetId).classList.add('active');
-                });
-            });
-
-            // Logika untuk Tooltip (Query 4b, 4c, 4d)
-            const tooltipElement = document.getElementById('tooltip');
-            if (tooltipElement) {
-                const tooltippedElements = document.querySelectorAll('[data-tooltip-text]');
-
-                tooltippedElements.forEach(el => {
-                    el.addEventListener('mouseenter', (event) => {
-                        tooltipElement.textContent = el.getAttribute('data-tooltip-text');
-                        tooltipElement.style.display = 'block';
-                        // Posisikan tooltip
-                        tooltipElement.style.left = (event.pageX + 10) + 'px';
-                        tooltipElement.style.top = (event.pageY - 30) + 'px';
-                        // Tampilkan dengan animasi
-                        setTimeout(() => { tooltipElement.style.opacity = '1'; }, 20);
-                    });
-
-                    el.addEventListener('mouseleave', () => {
-                        tooltipElement.style.opacity = '0';
-                        setTimeout(() => { tooltipElement.style.display = 'none'; }, 200);
-                    });
-
-                    el.addEventListener('mousemove', (event) => {
-                        // Update posisi saat mouse bergerak
-                        tooltipElement.style.left = (event.pageX + 10) + 'px';
-                        tooltipElement.style.top = (event.pageY - 30) + 'px';
-                    });
-                });
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Outfit"', 'sans-serif']
+                    },
+                    colors: {
+                        pop: { primary: '#0ea5e9' },
+                        luminous: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    boxShadow: {
+                        'glass-lg': '0 8px 32px 0 rgba(31, 38, 135, 0.1), inset 0 1px 0 0 rgba(255, 255, 255, 0.4)',
+                        'float': '0 20px 40px -10px rgba(0,0,0,0.15), 0 10px 20px -10px rgba(0,0,0,0.1)',
+                        'depth': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
+                        'inner-glow': 'inset 0 0 20px rgba(255,255,255,0.5)',
+                        'btn-glow': '0 0 15px rgba(14, 165, 233, 0.5)',
+                    },
+                    animation: {
+                        'fade-up': 'fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'pop-in': 'popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+                    },
+                    keyframes: {
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        popIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' }
+                        }
+                    }
+                }
             }
-
-            // Logika untuk Dark Mode (dari template asli, disesuaikan)
-            // (Saya akan tambahkan ini agar dropdown dan elemen baru sadar tema)
-            const applyTheme = (theme) => {
-                if (theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                    document.documentElement.classList.add('dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                }
-            };
-            
-            // Cek tema saat memuat
-            const savedTheme = localStorage.getItem('theme') || 'system';
-            applyTheme(savedTheme);
-            
-            // Tambahkan listener jika user ganti tema sistem
-             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-                if (!localStorage.getItem('theme')) {
-                    applyTheme('system');
-                }
-            });
-
-            // (Opsional: Tambahkan listener untuk tombol ganti tema jika ada)
-            // Misal:
-            // document.getElementById('toggle-dark-mode').addEventListener('click', () => {
-            //     const isDark = document.documentElement.classList.toggle('dark');
-            //     localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            // });
-
-        });
+        }
     </script>
 
+    <style>
+        /* Base Setup */
+        * { -webkit-tap-highlight-color: transparent; }
+        body { 
+            overscroll-behavior-y: none;
+            background-color: #f8fafc;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(210, 100%, 93%, 1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(190, 100%, 90%, 1) 0, transparent 50%), 
+                radial-gradient(at 100% 100%, hsla(330, 100%, 95%, 1) 0, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(250, 100%, 94%, 1) 0, transparent 50%);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        h1, h2, h3, .font-display { font-family: 'Outfit', sans-serif; }
+        
+        /* Typography enhancements */
+        .prose h1 { font-size: 1.5rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+        .prose h2 { font-size: 1.2rem; font-weight: 700; color: #1e293b; margin-top: 1.5rem; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e2e8f0; }
+        .prose p { margin-bottom: 1rem; line-height: 1.6; color: #475569; font-size: 0.95rem; }
+        .prose ul { list-style-type: disc; padding-left: 1.2rem; margin-bottom: 1rem; color: #475569; }
+        .prose strong { color: #0369a1; font-weight: 700; }
+        .prose table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; margin: 1.5rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; }
+        .prose th { background: #f8fafc; color: #64748b; font-weight: 700; padding: 12px; text-align: left; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .prose td { padding: 12px; border-top: 1px solid #f1f5f9; font-size: 0.9rem; color: #334155; }
+
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        .pt-safe { padding-top: env(safe-area-inset-top); }
+        .h-safe-screen { height: 100dvh; }
+        
+        #pdf-generator-container { position: absolute; left: -9999px; width: 794px; background: white; padding: 40px; }
+    </style>
+</head>
+<body class="h-safe-screen w-full overflow-hidden text-slate-800 flex flex-col">
+
+    <!-- Decorative Blobs -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-sky-200 rounded-full mix-blend-multiply filter blur-[80px] opacity-40 animate-pulse-slow"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] bg-indigo-200 rounded-full mix-blend-multiply filter blur-[80px] opacity-40 animate-pulse-slow" style="animation-delay: 2s"></div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast-container" class="fixed top-6 left-1/2 transform -translate-x-1/2 z-[100] flex flex-col gap-2 w-[90%] max-w-sm pointer-events-none transition-all"></div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="relative z-10 h-full w-full flex flex-col pt-safe max-w-lg mx-auto md:max-w-6xl md:flex-row md:gap-8 md:p-8">
+        
+        <!-- HEADER (Mobile) -->
+        <header class="flex-none px-6 py-4 flex justify-between items-center z-20 md:hidden">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-white shadow-lg flex items-center justify-center text-sky-600">
+                    <i class="fa-solid fa-layer-group text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-display font-bold text-slate-800 text-lg leading-none">KSB Suite</h1>
+                    <span class="text-[10px] font-bold text-sky-600 tracking-widest uppercase bg-sky-50 px-1.5 py-0.5 rounded-md mt-1 inline-block">Ultima 6.0</span>
+                </div>
+            </div>
+            <button onclick="toggleGoldenTime()" class="w-10 h-10 rounded-full bg-white/80 backdrop-blur-md shadow-md text-amber-500 flex items-center justify-center active:scale-90 transition-transform">
+                <i class="fa-solid fa-crown text-lg"></i>
+            </button>
+        </header>
+
+        <!-- DESKTOP SIDEBAR -->
+        <aside class="hidden md:flex flex-col w-72 bg-white/70 backdrop-blur-2xl rounded-[32px] border border-white/60 p-8 shadow-glass-lg h-full">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-500 to-indigo-600 shadow-lg shadow-sky-500/30 flex items-center justify-center text-white">
+                    <i class="fa-solid fa-layer-group text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-display font-extrabold text-slate-800 text-xl">KSB Suite</h1>
+                    <p class="text-xs font-bold text-slate-400 tracking-wider uppercase">Professional Intelligence</p>
+                </div>
+            </div>
+            
+            <nav class="space-y-3 flex-1">
+                <button onclick="switchMode('content')" id="desk-btn-content" class="w-full flex items-center gap-4 px-5 py-4 rounded-2xl font-bold text-sm transition-all group bg-white shadow-md text-sky-600 border border-sky-100">
+                    <div class="w-8 h-8 rounded-lg bg-sky-50 flex items-center justify-center group-hover:bg-sky-600 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-pen-nib"></i>
+                    </div>
+                    <span>Content Strategy</span>
+                </button>
+                
+                <!-- FORENSIC AUDIT BUTTON (Desktop) -->
+                <button onclick="switchMode('audit')" id="desk-btn-audit" class="w-full flex items-center gap-4 px-5 py-4 rounded-2xl font-bold text-sm transition-all group text-slate-500 hover:bg-white hover:shadow-sm">
+                    <div class="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center group-hover:bg-rose-500 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    </div>
+                    <span>Forensic Audit</span>
+                </button>
+            </nav>
+
+            <div class="mt-auto">
+                <button onclick="toggleGoldenTime()" class="w-full bg-gradient-to-r from-amber-100 to-orange-50 border border-amber-200/50 p-4 rounded-2xl flex items-center justify-between group hover:shadow-lg transition-all">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-white text-amber-500 flex items-center justify-center shadow-sm">
+                            <i class="fa-solid fa-crown text-sm"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-xs font-bold text-amber-800 uppercase">Golden Time</p>
+                            <p class="text-[10px] text-amber-600/80">Cek Jadwal 2025</p>
+                        </div>
+                    </div>
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <div class="flex-1 flex flex-col h-full overflow-hidden relative md:bg-white/40 md:backdrop-blur-xl md:rounded-[32px] md:border md:border-white/50">
+            
+            <div class="flex-1 overflow-y-auto overflow-x-hidden p-6 pb-36 md:pb-6 no-scrollbar space-y-8" id="main-scroll">
+                
+                <!-- Dynamic Hero Card -->
+                <div class="relative w-full h-48 rounded-[32px] overflow-hidden shadow-float group animate-fade-up">
+                    <img id="hero-img" src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-slate-900/40 to-transparent flex flex-col justify-center px-8">
+                        <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full px-3 py-1 w-fit mb-3">
+                            <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                            <span class="text-[10px] font-bold text-white uppercase tracking-wider">System Ready</span>
+                        </div>
+                        <h2 class="text-white font-display text-3xl font-bold leading-tight mb-1" id="hero-title">Content Strategy</h2>
+                        <p class="text-slate-200 text-sm font-light max-w-xs" id="hero-desc">Buat narasi viral yang memikat audiens dengan strategi data-driven.</p>
+                    </div>
+                </div>
+
+                <!-- Input Section -->
+                <div class="space-y-6 animate-fade-up" style="animation-delay: 100ms;">
+                    
+                    <!-- Platform Selector (Hidden in Audit Mode) -->
+                    <div id="platform-selector-container">
+                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 ml-1">Target Platform</label>
+                        <div class="flex gap-3 overflow-x-auto no-scrollbar pb-2 px-1">
+                            <button onclick="selectPlatform('instagram')" id="plat-instagram" class="flex-shrink-0 pl-1 pr-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm flex items-center gap-2 text-xs font-bold text-slate-600 transition-all hover:scale-105 active:scale-95">
+                                <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 flex items-center justify-center text-white"><i class="fa-brands fa-instagram"></i></div>
+                                Instagram
+                            </button>
+                            <button onclick="selectPlatform('linkedin')" id="plat-linkedin" class="flex-shrink-0 pl-1 pr-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm flex items-center gap-2 text-xs font-bold text-slate-600 transition-all hover:scale-105 active:scale-95">
+                                <div class="w-7 h-7 rounded-full bg-blue-700 flex items-center justify-center text-white"><i class="fa-brands fa-linkedin-in"></i></div>
+                                LinkedIn
+                            </button>
+                            <button onclick="selectPlatform('tiktok')" id="plat-tiktok" class="flex-shrink-0 pl-1 pr-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm flex items-center gap-2 text-xs font-bold text-slate-600 transition-all hover:scale-105 active:scale-95">
+                                <div class="w-7 h-7 rounded-full bg-black flex items-center justify-center text-white"><i class="fa-brands fa-tiktok"></i></div>
+                                TikTok
+                            </button>
+                            <button onclick="selectPlatform('threads')" id="plat-threads" class="flex-shrink-0 pl-1 pr-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm flex items-center gap-2 text-xs font-bold text-slate-600 transition-all hover:scale-105 active:scale-95">
+                                <div class="w-7 h-7 rounded-full bg-black flex items-center justify-center text-white"><i class="fa-brands fa-threads"></i></div>
+                                Threads
+                            </button>
+                            <button onclick="selectPlatform('facebook')" id="plat-facebook" class="flex-shrink-0 pl-1 pr-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm flex items-center gap-2 text-xs font-bold text-slate-600 transition-all hover:scale-105 active:scale-95">
+                                <div class="w-7 h-7 rounded-full bg-blue-600 flex items-center justify-center text-white"><i class="fa-brands fa-facebook-f"></i></div>
+                                Facebook
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Text Area -->
+                    <div class="glass-panel rounded-[24px] p-1.5 shadow-sm">
+                        <div class="bg-white rounded-[20px] p-5">
+                            <label class="flex items-center gap-2 mb-3">
+                                <span class="w-6 h-6 rounded-md bg-sky-100 text-sky-600 flex items-center justify-center text-xs"><i class="fa-solid fa-align-left"></i></span>
+                                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Brief & Konteks</span>
+                            </label>
+                            <textarea id="manual-text" rows="4" 
+                                class="w-full text-sm text-slate-700 placeholder:text-slate-400 bg-transparent border-none outline-none resize-none leading-relaxed"
+                                placeholder="Tuliskan ide mentah, topik, atau pengalaman yang ingin diolah..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Visual Evidence -->
+                    <div>
+                        <div class="flex justify-between items-center mb-3 px-1">
+                            <label class="text-xs font-bold text-slate-400 uppercase tracking-widest">Visual & PDF</label>
+                            <button onclick="resetGallery()" id="reset-btn" class="hidden text-[10px] font-bold text-rose-500 bg-rose-50 px-3 py-1.5 rounded-full border border-rose-100 hover:bg-rose-100 transition-all">
+                                Hapus Semua
+                            </button>
+                        </div>
+                        
+                        <div class="flex gap-3 overflow-x-auto pb-4 px-1 snap-x no-scrollbar" id="gallery-strip">
+                            <!-- Camera Btn -->
+                            <button onclick="triggerCamera()" class="snap-start flex-shrink-0 w-24 h-24 rounded-2xl bg-white border border-dashed border-sky-300 flex flex-col items-center justify-center gap-1 transition-all active:scale-95 group hover:border-sky-500 hover:bg-sky-50">
+                                <i class="fa-solid fa-camera text-xl text-sky-400 group-hover:text-sky-600 transition-colors"></i>
+                                <span class="text-[9px] font-bold text-sky-400 group-hover:text-sky-600 uppercase mt-1">Foto</span>
+                            </button>
+                            <!-- Upload Btn -->
+                            <button onclick="document.getElementById('file-upload').click()" class="snap-start flex-shrink-0 w-24 h-24 rounded-2xl bg-white border border-dashed border-slate-300 flex flex-col items-center justify-center gap-1 transition-all active:scale-95 group hover:border-slate-500 hover:bg-slate-50">
+                                <i class="fa-solid fa-cloud-arrow-up text-xl text-slate-400 group-hover:text-slate-600 transition-colors"></i>
+                                <span class="text-[9px] font-bold text-slate-400 group-hover:text-slate-600 uppercase mt-1">Upload</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Floating Bottom Bar (Mobile Only) -->
+            <div class="md:hidden absolute bottom-0 left-0 right-0 p-6 pt-12 bg-gradient-to-t from-white via-white/95 to-transparent z-30 flex flex-col gap-4">
+                
+                <div class="flex self-center bg-slate-100/80 backdrop-blur-md p-1 rounded-full shadow-lg border border-white mb-2">
+                    <button onclick="switchMode('content')" id="mob-btn-content" class="px-6 py-2.5 rounded-full text-xs font-bold transition-all bg-white text-sky-600 shadow-sm border border-slate-100">Content</button>
+                    <!-- FORENSIC AUDIT BUTTON (Mobile) -->
+                    <button onclick="switchMode('audit')" id="mob-btn-audit" class="px-6 py-2.5 rounded-full text-xs font-bold transition-all text-slate-400">Audit</button>
+                </div>
+
+                <button onclick="executeAI()" id="process-btn" class="w-full bg-slate-900 text-white font-display font-bold text-base h-14 rounded-2xl shadow-xl shadow-slate-900/30 flex items-center justify-center gap-3 active:scale-[0.98] transition-all border-t border-slate-700 overflow-hidden relative group">
+                    <div class="absolute inset-0 bg-gradient-to-r from-sky-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span class="relative z-10 flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Analysis
+                    </span>
+                </button>
+            </div>
+
+            <!-- Desktop Action Button -->
+            <div class="hidden md:block absolute bottom-8 right-8 left-8">
+                <button onclick="executeAI()" id="process-btn-desk" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-display font-bold text-lg h-16 rounded-2xl shadow-xl shadow-slate-900/20 flex items-center justify-center gap-3 active:scale-[0.99] transition-all">
+                    <i class="fa-solid fa-wand-magic-sparkles text-sky-400"></i> Generate Analysis
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- RESULT SHEET -->
+    <div id="result-sheet" class="fixed inset-0 z-50 flex flex-col translate-y-full transition-transform duration-500 cubic-bezier(0.32, 0.72, 0, 1) bg-slate-50/95 backdrop-blur-2xl md:absolute md:inset-0 md:rounded-[32px]">
+        
+        <div class="flex-none pt-safe px-6 py-5 flex justify-between items-center bg-white/50 backdrop-blur-md border-b border-slate-200/50 z-10 md:rounded-t-[32px]">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center border-2 border-white shadow-sm animate-pop-in">
+                    <i class="fa-solid fa-check text-lg"></i>
+                </div>
+                <div>
+                    <h2 class="font-display font-bold text-slate-900 text-lg">Analysis Result</h2>
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Insight Ready</p>
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <!-- TXT Download Button -->
+                <button onclick="downloadTextReport()" id="btn-download-report" class="hidden flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-slate-200 text-[11px] font-bold text-slate-600 hover:text-pop-primary hover:border-pop-primary hover:shadow-sm transition-all group">
+                    <i class="fa-solid fa-file-arrow-down text-slate-400 group-hover:text-pop-primary transition-colors"></i> 
+                    <span class="hidden sm:inline">Simpan .TXT</span>
+                </button>
+
+                <button onclick="downloadPDF()" class="w-10 h-10 rounded-xl bg-white text-slate-600 border border-slate-200 shadow-sm flex items-center justify-center hover:bg-slate-50 active:scale-90 transition-all" title="Simpan sebagai PDF">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </button>
+                <button onclick="closeSheet()" class="w-10 h-10 rounded-xl bg-white text-slate-400 border border-slate-200 shadow-sm flex items-center justify-center hover:text-rose-500 hover:border-rose-200 active:scale-90 transition-all">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-6 pb-24 md:pb-6 no-scrollbar relative">
+            <div class="bg-white rounded-[24px] shadow-sm border border-slate-100 p-6 min-h-full animate-fade-up">
+                <div id="report-body" class="prose prose-sm max-w-none"></div>
+            </div>
+        </div>
+        
+        <!-- Mobile Bottom Actions -->
+        <div class="md:hidden absolute bottom-8 right-8 pb-safe z-20 flex flex-col gap-3 items-end">
+             <button onclick="downloadTextReport()" class="h-12 w-12 rounded-full bg-white text-slate-700 shadow-xl shadow-slate-900/10 flex items-center justify-center border border-slate-200 active:scale-90 transition-all">
+                <i class="fa-solid fa-file-lines"></i>
+            </button>
+             <button onclick="downloadPDF()" class="h-14 px-6 bg-slate-900 text-white rounded-full shadow-2xl shadow-slate-900/40 flex items-center gap-3 font-bold active:scale-90 transition-all border border-slate-700">
+                <i class="fa-solid fa-download"></i> Simpan PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- LOADING OVERLAY -->
+    <div id="loading-overlay" class="fixed inset-0 z-[60] bg-white/60 backdrop-blur-lg flex flex-col items-center justify-center hidden transition-all duration-300">
+        <div class="relative w-32 h-32 mb-6">
+            <div class="absolute inset-0 rounded-full border-4 border-slate-100"></div>
+            <div class="absolute inset-0 rounded-full border-4 border-sky-500 border-t-transparent animate-spin"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-16 h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center text-sky-500 animate-bounce">
+                    <i class="fa-solid fa-wand-magic-sparkles text-2xl"></i>
+                </div>
+            </div>
+        </div>
+        <h3 class="font-display font-bold text-2xl text-slate-800 tracking-tight">Processing...</h3>
+        <p class="text-sm text-slate-500 mt-2 font-medium">Menyusun strategi & audit visual</p>
+    </div>
+
+    <!-- MODAL: GOLDEN TIME -->
+    <div id="golden-time-modal" class="fixed inset-0 z-[80] hidden flex items-end md:items-center justify-center sm:p-6">
+        <div class="absolute inset-0 bg-slate-900/30 backdrop-blur-md transition-opacity" onclick="toggleGoldenTime()"></div>
+        
+        <div class="relative bg-slate-50 w-full md:max-w-md rounded-t-[32px] md:rounded-[32px] shadow-depth overflow-hidden animate-fade-up max-h-[85vh] flex flex-col">
+            <div class="h-36 relative overflow-hidden bg-amber-400">
+                <img src="https://images.unsplash.com/photo-1550534791-2677533605ab?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover opacity-90 mix-blend-overlay">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-50 via-transparent to-transparent"></div>
+                
+                <div class="absolute bottom-4 left-6">
+                    <span class="bg-white/30 backdrop-blur-md border border-white/40 text-white text-[10px] font-bold px-2 py-1 rounded-lg uppercase tracking-wider mb-2 inline-block">Strategy 2025</span>
+                    <h3 class="text-2xl font-display font-extrabold text-slate-800 leading-none">Golden Time</h3>
+                </div>
+                
+                <button onclick="toggleGoldenTime()" class="absolute top-4 right-4 w-9 h-9 bg-black/20 hover:bg-black/30 backdrop-blur-md rounded-full text-white flex items-center justify-center transition-all">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="px-6 pb-6 pt-2 flex-1 overflow-y-auto no-scrollbar space-y-4">
+                <!-- LinkedIn -->
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-full bg-blue-50 text-blue-700 flex items-center justify-center flex-shrink-0 text-xl"><i class="fa-brands fa-linkedin"></i></div>
+                    <div class="flex-1">
+                        <div class="flex justify-between items-center mb-1">
+                            <h4 class="font-bold text-slate-800 text-sm">LinkedIn</h4>
+                            <span class="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">09:00 - 11:00</span>
+                        </div>
+                        <p class="text-xs text-slate-500 leading-relaxed">Fokus jam kerja produktif (Selasa-Kamis). Hindari Senin pagi & Jumat sore.</p>
+                    </div>
+                </div>
+                <!-- Instagram -->
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-full bg-pink-50 text-pink-600 flex items-center justify-center flex-shrink-0 text-xl"><i class="fa-brands fa-instagram"></i></div>
+                    <div class="flex-1">
+                        <div class="flex justify-between items-center mb-1">
+                            <h4 class="font-bold text-slate-800 text-sm">Instagram</h4>
+                            <span class="text-[10px] font-bold text-pink-600 bg-pink-50 px-2 py-0.5 rounded">11-13 & 19-21</span>
+                        </div>
+                        <p class="text-xs text-slate-500 leading-relaxed">Jam istirahat makan siang & waktu santai malam hari. Reels: 20:00+.</p>
+                    </div>
+                </div>
+                <!-- TikTok -->
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-full bg-slate-100 text-black flex items-center justify-center flex-shrink-0 text-xl"><i class="fa-brands fa-tiktok"></i></div>
+                    <div class="flex-1">
+                        <div class="flex justify-between items-center mb-1">
+                            <h4 class="font-bold text-slate-800 text-sm">TikTok</h4>
+                            <span class="text-[10px] font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded">12-14 & 20-23</span>
+                        </div>
+                        <p class="text-xs text-slate-500 leading-relaxed">Traffic tinggi saat 'doom-scrolling' sebelum tidur & jam makan siang.</p>
+                    </div>
+                </div>
+                <!-- Facebook & Threads -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-100">
+                        <div class="flex items-center gap-2 mb-2"><i class="fa-brands fa-facebook text-blue-600"></i><span class="font-bold text-xs">Facebook</span></div>
+                        <div class="text-[10px] font-bold bg-blue-50 text-blue-600 inline-block px-1.5 py-0.5 rounded mb-1">13:00 - 16:00</div>
+                        <p class="text-[9px] text-slate-400">Kamis - Minggu</p>
+                    </div>
+                    <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-100">
+                        <div class="flex items-center gap-2 mb-2"><i class="fa-brands fa-threads text-black"></i><span class="font-bold text-xs">Threads</span></div>
+                        <div class="text-[10px] font-bold bg-slate-100 text-slate-700 inline-block px-1.5 py-0.5 rounded mb-1">08:00 & 20:00</div>
+                        <p class="text-[9px] text-slate-400">Pagi & Malam</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-6 pt-2">
+                <button onclick="toggleGoldenTime()" class="w-full bg-slate-900 text-white font-bold py-3.5 rounded-2xl shadow-lg active:scale-[0.98] transition-transform">Tutup Strategi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Inputs & PDF Container -->
+    <input type="file" id="camera-input" accept="image/*" capture="environment" onchange="handleFileSelect(this)" class="hidden">
+    <!-- Updated file input to accept PDF -->
+    <input type="file" id="file-upload" accept="image/*,application/pdf" multiple onchange="handleFileSelect(this)" class="hidden">
+    
+    <div id="pdf-generator-container">
+        <!-- Header Laporan PDF yang Eye-Catching & Profesional -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 3px solid #0f172a;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #0ea5e9, #4f46e5); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <div>
+                    <h1 style="font-size: 28px; font-weight: 800; color: #0f172a; margin: 0; line-height: 1; letter-spacing: -0.5px;">KSB Suite</h1>
+                    <div style="font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 2px; margin-top: 4px;">Strategic Intelligence Report</div>
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <div style="font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;">Generated On</div>
+                <div style="font-size: 14px; font-weight: 700; color: #0f172a;" id="pdf-date"></div>
+            </div>
+        </div>
+        
+        <div id="pdf-content-area" class="prose prose-sm max-w-none"></div>
+        
+        <div id="pdf-visual-section" style="display: none; margin-top: 40px; page-break-inside: avoid;">
+            <div style="background: #f8fafc; padding: 15px 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #e2e8f0; display: flex; align-items: center; gap: 10px;">
+                <i class="fa-solid fa-paperclip" style="color: #64748b;"></i>
+                <h3 style="margin: 0; font-size: 14px; font-weight: 800; color: #334155; text-transform: uppercase;">Lampiran Visual / Bukti</h3>
+            </div>
+            <div class="pdf-gallery-grid" id="pdf-gallery-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"></div>
+        </div>
+        
+        <div style="margin-top: 50px; border-top: 1px solid #e2e8f0; padding-top: 20px; text-align: center; font-size: 10px; color: #94a3b8; display: flex; justify-content: space-between; align-items: center;">
+            <span>CONFIDENTIAL DOCUMENT</span>
+            <span>Generated by KSB Suite Ultima AI</span>
+        </div>
+    </div>
+
+    <script>
+        let currentMode = 'content'; 
+        let currentPlatform = 'instagram';
+        let fileParts = []; 
+        let isProcessing = false;
+        let lastResultText = "";
+        let currentResult = null; // Disimpan sebagai null karena mode baru menggunakan Markdown text langsung
+
+        const platformConfig = {
+            instagram: { color: 'from-yellow-400 via-red-500 to-purple-500', icon: 'fa-instagram', label: 'Instagram' },
+            linkedin: { color: 'bg-blue-700', icon: 'fa-linkedin-in', label: 'LinkedIn' },
+            tiktok: { color: 'bg-black', icon: 'fa-tiktok', label: 'TikTok' },
+            threads: { color: 'bg-black', icon: 'fa-threads', label: 'Threads' },
+            facebook: { color: 'bg-blue-600', icon: 'fa-facebook-f', label: 'Facebook' }
+        };
+        
+        // Mock UI object
+        const ui = {
+            btnDownloadTxt: null, 
+            visualStyle: { value: "Professional / Default" }
+        };
+
+        window.onload = () => { 
+            selectPlatform('instagram');
+            ui.btnDownloadTxt = document.getElementById('btn-download-report');
+        };
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            let bgClass = 'bg-slate-800';
+            let icon = 'fa-circle-info';
+            if (type === 'error') { bgClass = 'bg-rose-500'; icon = 'fa-triangle-exclamation'; }
+            if (type === 'success') { bgClass = 'bg-emerald-500'; icon = 'fa-circle-check'; }
+            toast.className = `${bgClass} text-white px-5 py-3 rounded-2xl shadow-float flex items-center gap-3 text-xs font-bold animate-fade-up backdrop-blur-md`;
+            toast.innerHTML = `<i class="fa-solid ${icon} text-sm"></i> <span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateY(-10px)'; setTimeout(() => toast.remove(), 300); }, 3000);
+        }
+
+        function switchMode(mode) {
+            currentMode = mode;
+            const heroImg = document.getElementById('hero-img');
+            const heroTitle = document.getElementById('hero-title');
+            const heroDesc = document.getElementById('hero-desc');
+            const platSelector = document.getElementById('platform-selector-container');
+            const dBtnContent = document.getElementById('desk-btn-content');
+            const dBtnAudit = document.getElementById('desk-btn-audit');
+            const mBtnContent = document.getElementById('mob-btn-content');
+            const mBtnAudit = document.getElementById('mob-btn-audit');
+
+            const activeClassD = "bg-white shadow-md text-sky-600 border border-sky-100";
+            const inactiveClassD = "text-slate-500 hover:bg-white hover:shadow-sm border border-transparent";
+            const activeClassM = "bg-white text-sky-600 shadow-sm border border-slate-100";
+            const inactiveClassM = "text-slate-400 bg-transparent border border-transparent";
+
+            if (mode === 'content') {
+                heroImg.src = "https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1000&auto=format&fit=crop";
+                heroTitle.innerText = "Content Strategy";
+                heroDesc.innerText = "Buat narasi viral yang memikat audiens dengan strategi data-driven.";
+                platSelector.style.display = 'block';
+                if(dBtnContent) { dBtnContent.className = `w-full flex items-center gap-4 px-5 py-4 rounded-2xl font-bold text-sm transition-all group ${activeClassD}`; }
+                if(dBtnAudit) { dBtnAudit.className = `w-full flex items-center gap-4 px-5 py-4 rounded-2xl font-bold text-sm transition-all group ${inactiveClassD}`; }
+                if(mBtnContent) { mBtnContent.className = `px-6 py-2.5 rounded-full text-xs font-bold transition-all ${activeClassM}`; }
+                if(mBtnAudit) { mBtnAudit.className = `px-6 py-2.5 rounded-full text-xs font-bold transition-all ${inactiveClassM}`; }
+            } else {
+                heroImg.src = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop";
+                heroTitle.innerText = "Forensic Audit";
+                heroDesc.innerText = "Analisis visual tajam untuk deteksi anomali dan kepatuhan.";
+                platSelector.style.display = 'none';
+                if(dBtnContent) { dBtnContent.className = `w-full flex items-center gap-4 px-5 py-4 rounded-2xl font-bold text-sm transition-all group ${inactiveClassD}`; }
+                if(dBtnAudit) { dBtnAudit.className = `w-full flex items-center gap-4 px-5 py-4 rounded-2xl font-bold text-sm transition-all group ${activeClassD}`; }
+                if(mBtnContent) { mBtnContent.className = `px-6 py-2.5 rounded-full text-xs font-bold transition-all ${inactiveClassM}`; }
+                if(mBtnAudit) { mBtnAudit.className = `px-6 py-2.5 rounded-full text-xs font-bold transition-all ${activeClassM}`; }
+            }
+        }
+
+        function selectPlatform(platform) {
+            currentPlatform = platform;
+            const buttons = document.querySelectorAll('#platform-selector-container button');
+            const activeStyles = {
+                'instagram': "bg-gradient-to-br from-white to-pink-50 border-pink-200 text-pink-600 shadow-md ring-2 ring-pink-100",
+                'linkedin': "bg-gradient-to-br from-white to-blue-50 border-blue-200 text-blue-700 shadow-md ring-2 ring-blue-100",
+                'tiktok': "bg-gradient-to-br from-white to-slate-100 border-slate-300 text-black shadow-md ring-2 ring-slate-200",
+                'threads': "bg-gradient-to-br from-white to-slate-100 border-slate-300 text-black shadow-md ring-2 ring-slate-200",
+                'facebook': "bg-gradient-to-br from-white to-blue-50 border-blue-200 text-blue-600 shadow-md ring-2 ring-blue-100"
+            };
+            const inactiveStyle = "bg-white border-slate-200 text-slate-500 hover:bg-slate-50";
+            buttons.forEach(btn => {
+                if(btn.id === `plat-${platform}`) {
+                    btn.className = `flex-shrink-0 pl-1 pr-4 py-1.5 rounded-full border shadow-sm flex items-center gap-2 text-xs font-bold transition-all ${activeStyles[platform]}`;
+                } else {
+                    btn.className = `flex-shrink-0 pl-1 pr-4 py-1.5 rounded-full border shadow-sm flex items-center gap-2 text-xs font-bold transition-all ${inactiveStyle}`;
+                }
+            });
+        }
+
+        function toggleGoldenTime() {
+            const modal = document.getElementById('golden-time-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function closeSheet() {
+            document.getElementById('result-sheet').classList.remove('translate-y-0');
+            document.getElementById('result-sheet').classList.add('translate-y-full');
+        }
+
+        window.triggerCamera = () => document.getElementById('camera-input').click();
+
+        window.handleFileSelect = async (input) => {
+            if (input.files.length > 0) {
+                document.getElementById('reset-btn').classList.remove('hidden');
+                for (const file of input.files) {
+                    if (file.type === 'application/pdf') {
+                        if (file.size > 5 * 1024 * 1024) {
+                            showToast("PDF max 5MB", 'error');
+                            continue;
+                        }
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            const base64Data = e.target.result.split(',')[1];
+                            fileParts.push({ inlineData: { mimeType: 'application/pdf', data: base64Data }, type: 'pdf', name: file.name });
+                            addThumbnail(null, 'pdf');
+                        };
+                        reader.readAsDataURL(file);
+                    } else if (file.type.startsWith('image/')) {
+                        try {
+                            const compressedDataUrl = await compressImage(file);
+                            const base64Data = compressedDataUrl.split(',')[1];
+                            fileParts.push({ inlineData: { mimeType: 'image/jpeg', data: base64Data }, originalUrl: compressedDataUrl, type: 'image' });
+                            addThumbnail(compressedDataUrl, 'image');
+                        } catch (err) { showToast("Error gambar", 'error'); }
+                    }
+                }
+                input.value = ''; 
+                showToast(`${input.files.length} file ditambahkan`, 'success');
+            }
+        };
+
+        function compressImage(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        const MAX_WIDTH = 1000; 
+                        const scale = MAX_WIDTH / img.width;
+                        canvas.width = scale < 1 ? MAX_WIDTH : img.width;
+                        canvas.height = scale < 1 ? img.height * scale : img.height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        resolve(canvas.toDataURL('image/jpeg', 0.7));
+                    };
+                    img.onerror = reject;
+                };
+                reader.onerror = reject;
+            });
+        }
+
+        function addThumbnail(src, type) {
+            const gallery = document.getElementById('gallery-strip');
+            const div = document.createElement('div');
+            div.className = "snap-start flex-shrink-0 w-24 h-24 rounded-2xl overflow-hidden border border-white shadow-md relative group animate-pop-in bg-white";
+            
+            if (type === 'pdf') {
+                div.innerHTML = `<div class="w-full h-full flex flex-col items-center justify-center bg-red-50 text-red-500"><i class="fa-solid fa-file-pdf text-2xl"></i><span class="text-[8px] font-bold mt-1">PDF ADDED</span></div>`;
+            } else {
+                div.innerHTML = `<img src="${src}" class="w-full h-full object-cover">`;
+            }
+            
+            gallery.insertBefore(div, gallery.children[gallery.children.length - 2]); 
+        }
+
+        window.resetGallery = () => {
+            fileParts = [];
+            const gallery = document.getElementById('gallery-strip');
+            while (gallery.children.length > 2) {
+                gallery.removeChild(gallery.firstChild);
+            }
+            document.getElementById('reset-btn').classList.add('hidden');
+            showToast("Galeri dikosongkan");
+        };
+
+        // --- UPDATED REPORT GENERATION (Aligned with Markdown Output) ---
+        window.downloadTextReport = function() {
+            if (!lastResultText) {
+                showToast("Belum ada data untuk diunduh.", "error");
+                return;
+            }
+
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('id-ID', { dateStyle: 'full' });
+            const timeStr = now.toLocaleTimeString('id-ID');
+
+            let report = "╔══════════════════════════════════════════════════════════════════════╗\n";
+            report += "║                     KSB SUITE INTELLIGENCE REPORT                    ║\n";
+            report += "╠══════════════════════════════════════════════════════════════════════╣\n";
+            report += `║  📅 TANGGAL : ${dateStr.padEnd(49)}║\n`;
+            report += `║  ⏰ PUKUL   : ${timeStr.padEnd(49)}║\n`;
+            report += `║  📱 MODE    : ${currentMode.toUpperCase().padEnd(49)}║\n`;
+            report += "╚══════════════════════════════════════════════════════════════════════╝\n\n";
+
+            // Clean Markdown for TXT readability
+            let cleanText = lastResultText
+                .replace(/\*\*(.*?)\*\*/g, "$1") // Remove Bold
+                .replace(/## (.*?)\n/g, "\n[ $1 ]\n") // Format H2
+                .replace(/### (.*?)\n/g, "\n>> $1\n") // Format H3
+                .replace(/`/g, "") // Remove code ticks
+                .replace(/&nbsp;/g, " ") // Clean HTML entities
+                .replace(/\n/g, "\r\n"); // Proper line endings
+
+            report += cleanText;
+            
+            report += "\n\n========================================================================\n";
+            report += "   Generated by KSB Suite Ultima AI • Confidential & Professional Use   \n";
+            report += "========================================================================\n";
+
+            const blob = new Blob([report], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            
+            // Generate Safe Filename
+            let rawInput = document.getElementById('manual-text').value.trim() || "Report";
+            let safeTitle = rawInput.substring(0, 25).replace(/[^a-zA-Z0-9 ]/g, "").replace(/\s+/g, "-");
+            const dd = String(now.getDate()).padStart(2, '0');
+            const mm = String(now.getMonth() + 1).padStart(2, '0');
+            const HH = String(now.getHours()).padStart(2, '0');
+            const MM = String(now.getMinutes()).padStart(2, '0');
+            
+            // Format: [Judul]-[dd-mm]-[hh-mm].txt
+            const fileName = `${safeTitle}-${dd}-${mm}-${HH}.${MM}.txt`;
+            
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            
+            showToast("Laporan berhasil diunduh!", "success");
+        };
+
+        window.downloadPDF = async () => {
+            if(!lastResultText) return showToast("Belum ada hasil", 'error');
+            showToast("Menyiapkan PDF...", 'info');
+            
+            try {
+                const { jsPDF } = window.jspdf;
+                const now = new Date();
+                
+                let rawInput = document.getElementById('manual-text').value.trim() || "Report";
+                let title = rawInput.substring(0, 25).replace(/[^a-zA-Z0-9 ]/g, "").replace(/\s+/g, "-");
+
+                const dd = String(now.getDate()).padStart(2, '0');
+                const mm = String(now.getMonth() + 1).padStart(2, '0');
+                const hh = String(now.getHours()).padStart(2, '0');
+                const min = String(now.getMinutes()).padStart(2, '0');
+
+                // Format: [Judul]-[dd-mm]-[hh-mm].pdf
+                const fileName = `${title}-${dd}-${mm}-${hh}.${min}.pdf`;
+
+                // Set content
+                document.getElementById('pdf-date').innerText = now.toLocaleDateString('id-ID', { dateStyle: 'full' }) + ` ${hh}:${min}`;
+                document.getElementById('pdf-content-area').innerHTML = marked.parse(lastResultText);
+                
+                const visualSection = document.getElementById('pdf-visual-section');
+                const galleryGrid = document.getElementById('pdf-gallery-grid');
+                galleryGrid.innerHTML = '';
+
+                let hasVisuals = false;
+                fileParts.forEach((part, i) => {
+                    if (part.type === 'image') {
+                        hasVisuals = true;
+                        const item = document.createElement('div');
+                        item.style.breakInside = "avoid";
+                        item.style.backgroundColor = "#fff";
+                        item.style.border = "1px solid #e2e8f0";
+                        item.style.borderRadius = "12px";
+                        item.style.overflow = "hidden";
+                        item.style.marginBottom = "15px"; 
+                        item.style.boxShadow = "0 4px 6px rgba(0,0,0,0.05)";
+                        
+                        item.innerHTML = `
+                            <div style="width: 100%; height: 220px; overflow: hidden; background-color: #f8fafc; border-bottom: 1px solid #f1f5f9;">
+                                <img src="${part.originalUrl}" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div style="padding: 12px; font-size: 11px; text-align: center; color: #64748b; font-weight: 700; background: #fff; letter-spacing: 0.5px;">
+                                EXHIBIT #${i+1}
+                            </div>
+                        `;
+                        galleryGrid.appendChild(item);
+                    }
+                });
+
+                visualSection.style.display = hasVisuals ? 'block' : 'none';
+                
+                await new Promise(r => setTimeout(r, 800)); 
+
+                const element = document.getElementById('pdf-generator-container');
+                const canvas = await html2canvas(element, { scale: 2, useCORS: true, backgroundColor: '#ffffff', onclone: (doc) => doc.getElementById('pdf-generator-container').style.display = 'block' });
+                
+                const imgData = canvas.toDataURL('image/jpeg', 0.95);
+                const pdf = new jsPDF({ orientation: 'portrait', unit: 'px', format: [canvas.width/2, canvas.height/2] });
+                pdf.addImage(imgData, 'JPEG', 0, 0, canvas.width/2, canvas.height/2);
+                pdf.save(fileName);
+                
+                showToast("PDF Berhasil Disimpan!", 'success');
+
+            } catch(e) { console.error(e); showToast("Gagal: " + e.message, 'error'); }
+        };
+
+        // --- UPDATED EXECUTE AI (INTEGRATED LOGIC) ---
+        window.executeAI = async () => {
+            if(isProcessing) return;
+            const text = document.getElementById('manual-text').value;
+            
+            // Validasi Input
+            if(!text && fileParts.length === 0) return showToast("Mohon isi teks konteks atau upload bukti file", 'error');
+
+            isProcessing = true;
+            document.getElementById('loading-overlay').classList.remove('hidden');
+            
+            // Hide previous download button to reset state
+            if(document.getElementById('btn-download-report')) {
+                document.getElementById('btn-download-report').classList.add('hidden');
+            }
+
+            try {
+                let systemInstruction = "";
+                let slideInstruction = "";
+                
+                // --- LOGIKA MODE: CONTENT STRATEGY ---
+                if (currentMode === 'content') {
+                    switch(currentPlatform) {
+                        case 'instagram': slideInstruction = "Format Carousel: Optimalkan antara 5-10 slide untuk retensi maksimal."; break;
+                        case 'linkedin': slideInstruction = "Format Dokumen/Carousel: 5-12 halaman padat berisi insight profesional."; break;
+                        case 'tiktok': slideInstruction = "Format Skrip Video Pendek: Bagi menjadi 3-5 scenes (Hook, Value, CTA)."; break;
+                        case 'threads': slideInstruction = "Format Thread: 3-7 tweet berantai yang memancing diskusi."; break;
+                        case 'facebook': slideInstruction = "Format Postingan Bergambar/Album: 3-5 poin visual utama."; break;
+                        default: slideInstruction = "Sesuaikan jumlah bagian dengan kepadatan materi.";
+                    }
+
+                    systemInstruction = `
+                    PERAN: Strategis Konten Senior & Storyteller Ahli.
+                    PLATFORM: ${currentPlatform.toUpperCase()}
+                    TONE: Engaging, Humanis, Viral-Potential.
+                    
+                    OUTPUT (MARKDOWN):
+                    ## Strategi Konten (${currentPlatform}) 🚀
+                    - **Konsep:** [Ide Inti]
+                    - **Hook:** [Kalimat Pembuka]
+                    - **Struktur:** [${slideInstruction}]
+                    
+                    ## Caption & Hashtags 📝
+                    Caption story-telling + CTA + Hashtag relevan.
+                    `;
+                
+                // --- LOGIKA MODE: FORENSIC AUDIT (UPGRADED) ---
+                } else {
+                    systemInstruction = `
+                    PERAN: Lead Forensic Auditor & Certified Fraud Examiner (CFE).
+                    TUJUAN: Melakukan audit investigatif mendalam terhadap input teks dan bukti visual yang dilampirkan untuk mendeteksi anomali, manipulasi, atau risiko kepatuhan.
+                    
+                    KEMAMPUAN ANALISIS (VISUAL & TEKS):
+                    1. OCR & Validasi Data: Ekstrak angka/tanggal dari gambar dan cocokkan dengan klaim di teks.
+                    2. Deteksi Manipulasi: Cari tanda-tanda "photoshopping" (pixelation tidak wajar, font yang tidak konsisten, bayangan yang salah) pada dokumen/bukti transfer.
+                    3. Analisis Logika: Cari ketidakkonsistenan narasi atau alibi yang tidak masuk akal.
+
+                    OUTPUT YANG DIWAJIBKAN (FORMAT MARKDOWN):
+
+                    ## 1. Executive Summary 🛡️
+                    Rangkuman padat (2-3 kalimat) mengenai status dokumen/kasus ini untuk level direksi. Nyatakan dengan tegas: AMAN, MENCURIGAKAN, atau BERISIKO TINGGI.
+
+                    ## 2. Tabel Temuan Forensik
+                    | Komponen Audit | Status | Observasi & Temuan Kritis |
+                    | :--- | :--- | :--- |
+                    | **Konsistensi Data** | [Valid/Invalid] | (Misal: Tanggal di kwitansi tidak cocok dengan hari libur) |
+                    | **Analisis Visual** | [Asli/Terindikasi Edit] | (Misal: Font pada nominal terlihat berbeda/tempelan) |
+                    | **Logika Konteks** | [Masuk Akal/Janggal] | (Analisis narasi pengguna) |
+                    | **Kepatuhan (Compliance)** | [Pass/Fail] | (Kesesuaian dengan standar umum/regulasi) |
+
+                    ## 3. Analisis Risiko & Red Flags 🚩
+                    List poin-poin bahaya yang ditemukan (gunakan bullet points):
+                    - [Red Flag 1]
+                    - [Red Flag 2]
+
+                    ## 4. Final Verdict ⚖️
+                    - **Integrity Score:** [0-100]% (Berikan <50% jika ada indikasi manipulasi visual).
+                    - **Rekomendasi Tindakan:** Langkah konkret apa yang harus diambil user selanjutnya (misal: "Minta rekening koran asli", "Lakukan verifikasi telepon", dll).
+                    
+                    GAYA BAHASA: Formal, Objektif, Tajam, Tanpa Basa-basi.
+                    `;
+                }
+                
+                // Persiapan Data untuk Dikirim ke AI
+                const userPrompt = `CONTEXT & DATA: ${text}\n\nTask: Analyze the context above along with the ${fileParts.length} attached files based on your role.`;
+                
+                const cleanFileParts = fileParts.map(p => ({ inlineData: p.inlineData }));
+                const contentsParts = [{ text: userPrompt }, ...cleanFileParts];
+
+                // PANGGILAN API (Fetch)
+                const response = await fetch('/api/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        contents: [{ parts: contentsParts }], 
+                        systemInstruction: { parts: [{ text: systemInstruction }] } 
+                    })
+                });
+
+                if (!response.ok) throw new Error("Gagal menghubungi server AI");
+                
+                const data = await response.json();
+                
+                // Mengambil teks hasil
+                lastResultText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                
+                if(!lastResultText) throw new Error("AI tidak memberikan respon teks");
+
+                // Render ke HTML (Markdown to HTML)
+                document.getElementById('report-body').innerHTML = marked.parse(lastResultText);
+                
+                // Show Download TXT Button
+                if(document.getElementById('btn-download-report')) {
+                    document.getElementById('btn-download-report').classList.remove('hidden');
+                }
+
+                // Tampilkan Result Sheet
+                const sheet = document.getElementById('result-sheet');
+                sheet.classList.remove('translate-y-full');
+                sheet.classList.add('translate-y-0');
+                
+                showToast("Analisis Selesai!", 'success');
+
+            } catch(e) { 
+                console.error(e); 
+                showToast("Terjadi Kesalahan: " + e.message, 'error'); 
+            } finally { 
+                isProcessing = false; 
+                document.getElementById('loading-overlay').classList.add('hidden'); 
+            }
+        };
+    </script>
 </body>
 </html>
-
-
-
